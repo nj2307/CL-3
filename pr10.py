@@ -1,10 +1,9 @@
-# weather data processing
-
 import csv
 from multiprocessing import Pool
 
 def process_year_data(chunk):
-    year_temps = {}  # Dictionary to store temperatures for each year
+    """Process temperature data for each year in a chunk."""
+    year_temps = {}  
     
     for row in chunk:
         year = row['Year']
@@ -20,6 +19,7 @@ def process_year_data(chunk):
     return year_temps
 
 def find_coolest_hottest_year(data_file):
+    """Find the coolest and hottest years based on average temperature."""
     chunks = []
     with open(data_file, 'r') as file:
         reader = csv.DictReader(file)
@@ -56,8 +56,8 @@ def find_coolest_hottest_year(data_file):
     return coolest_year, hottest_year
 
 if __name__ == "__main__":
-    data_file = "weather_data.csv"  # Update with your data file path
+    data_file = "weather_data.csv"  
     coolest, hottest = find_coolest_hottest_year(data_file)
     
-    print(f"Coolest year based on average temperature: {coolest}")
-    print(f"Hottest year based on average temperature: {hottest}")
+    print(f"Coolest year: {coolest}")
+    print(f"Hottest year: {hottest}")
